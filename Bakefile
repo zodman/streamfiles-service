@@ -1,0 +1,11 @@
+VENV=.venv/bin/activate
+run: @interactive
+    source ${VENV}
+    uvicorn main:app --reload
+
+initdb:
+    source ${VENV}
+    python -m db.database --help
+
+upload:
+    curl --request POST -F file=@settings.yml http://localhost:8000/upload/
