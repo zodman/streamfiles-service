@@ -3,6 +3,9 @@ orm~=0.1
 aiosqlite
 python-multipart
 aioboto3
+jinja2
+aiofiles
+torf
 
 # tools
 click

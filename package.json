@@ -1,0 +1,16 @@
+{
+  "name": "webtorrent-service",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:zodman/streamfiles-service.git",
+  "author": "Andres Vargas <andres@python3.ninja>",
+  "license": "MIT",
+  "scripts": {
+    "build": "browserify -p esmify static/src/main.js > static/dist/main.js"
+  },
+  "dependencies": {
+    "browserify": "^17.0.0",
+    "esmify": "^2.1.1",
+    "webtorrent": "^1.0.0"
+  }
+}
