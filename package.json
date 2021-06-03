@@ -6,11 +6,16 @@
   "author": "Andres Vargas <andres@python3.ninja>",
   "license": "MIT",
   "scripts": {
-    "build": "browserify -p esmify static/src/main.js > static/dist/main.js"
+    "all": "yarn run build && yarn run obs",
+    "build": "browserify -p esmify static/src/main.js > static/dist/main.js",
+    "obs": "javascript-obfuscator static/dist/main.js --output static/dist/obs.main.js"
   },
   "dependencies": {
+    "bittorrent-tracker": "^9.17.0",
     "browserify": "^17.0.0",
     "esmify": "^2.1.1",
+    "javascript-obfuscator": "^2.14.0",
+    "run-node": "^2.0.0",
     "webtorrent": "^1.0.0"
   }
 }

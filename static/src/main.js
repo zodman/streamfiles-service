@@ -5,14 +5,13 @@ if (WebTorrent.WEBRTC_SUPPORT) {
 }
 
 client = new WebTorrent();
+var protocol = window.location.protocol.replace("http", "ws")
 trackers = [
-    "wss://tracker.btorrent.xyz",
-    "wss://tracker.openwebtorrent.com",
-    "wss://tracker.fastcast.nz",
-    "wss://tracker.fastcast.nz/"
+    `${protocol}//${window.location.hostname}:8080/`
 ]
-const torrentUrl = "http://localhost:8000/torrent/";
+const torrentUrl = `${window.location.protocol}//${window.location.host}/torrent/`;
 
+console.log("trackers", trackers, 'url',  torrentUrl);
 client.add(torrentUrl,{'announce': trackers},(torrent) =>{
     console.log("loaded", torrent.numPeers, 'peers', torrent);
     let file = torrent.files[0];
@@ -24,12 +23,14 @@ client.add(torrentUrl,{'announce': trackers},(torrent) =>{
 
 client.on('torrent', t => {
         console.log("on torrent", t);
-        let url ="http://localhost:8000/download/otome-1.mp4?wiii=1";
+        let url =`${window.location.protocol}//${window.location.host}/download/otome-1.mp4?wiii=1`;
         t.addWebSeed(url);
 });
+
 
 
 client.on("error", (e) =>{
     console.log("client error", e);
 });
 
+window.client=client

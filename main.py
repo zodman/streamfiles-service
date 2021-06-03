@@ -47,13 +47,11 @@ async def download(filename: str, response: Response, request: Request):
         if bytes_:
             kwargs.update({'Range': bytes_})
         async with aioboto3.client("s3", **aws_kwargs) as s3:
-            print(kwargs)
             try:
                 await s3.head_object(**kwargs)
             except botocore.exceptions.ClientError:
                 return "nani?"
             resp = await s3.get_object(**kwargs)
-            print(resp)
             data = await resp["Body"].read()
             headers = {
                 'Content-Range':resp["ContentRange"],

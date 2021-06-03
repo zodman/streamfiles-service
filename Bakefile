@@ -1,4 +1,9 @@
 VENV=.venv/bin/activate
+tracker:
+    yarn run-node webtorrent-tracker.js
+watch:
+    watchexec --watch static/src/** yarn run build
+
 run: @interactive
     source ${VENV}
     uvicorn main:app --reload
