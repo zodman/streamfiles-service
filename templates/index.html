@@ -3,16 +3,25 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Hello Bulma!</title>
+        <title>Webtorrent for video </title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+        <style>
+          [x-cloak] { display: none !important; }
+        </style>
+          <script> window.file="{{filename}}" </script>
     </head>
     <body>
-        <section class="section">
-            <div class="container">
-                <div class="torrent"></div>
-                <div class="info"></div>
+        <script src="/static/dist/main.js" defer></script>
+            <div class="container" style="height:100vh">
+                <div class="torrent" style=""></div>
+                <div class="info is-size-7" x-data="torrent">
+                      Done: <span x-text="done"></span>
+                      download Speed: <span x-text="downloadSpeed"></span>
+                      uploadSpeed: <span x-text="uploadSpeed"></span>
+                      progress: <span x-text="progress"></span>
+                      Peers: <span x-text="torrent.numPeers"></span>
+                      Ratio: <span x-text="torrent.ratio"></span>
+                </div>
             </div>
-        </section>
-        <script src="/static/dist/main.js"></script>
     </body>
 </html>

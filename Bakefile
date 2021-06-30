@@ -2,15 +2,20 @@ VENV=.venv/bin/activate
 tracker:
     yarn run-node webtorrent-tracker.js
 watch:
-    watchexec --watch static/src/** yarn run build
+    watchexec --watch static/src/  yarn run build
+
+bsync:
+    browser-sync   start -p localhost:8000 -f static/dist/ -f templates/* -f *.py
 
 run: @interactive
     source ${VENV}
-    uvicorn main:app --reload
+    uvicorn main:app --log-level debug --port 8001
 
 initdb:
     source ${VENV}
     python -m db.database --help
 
 upload:
-    curl --request POST -F file=@settings.yml http://localhost:8000/upload/
+    set -x
+    #litecli db.sqlite3 -e "delete from file where filename=\"$1\""
+    curl --request POST -F "file=@$1" http://localhost:8000/upload/

@@ -1,8 +1,8 @@
 import easyconf
 import os
+import datetime
 
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-
+BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 config = easyconf.Config(os.path.join(BASE_DIR, "settings.yml"))
 
 BUCKET = config.BUCKET(initial="animeesp")
@@ -21,4 +21,9 @@ aws_kwargs = {
     "endpoint_url": AWS_ENDPOINT_URL
 }
 CDN_PATH = config.CDN_PATH(initial="/cdn/")
-DATA_DIR = config.DATA_DIR(initial=os.path.join(BASE_DIR, "data/"))
+CACHE_DIR= config.CACHE_DIR(initial=os.path.join(BASE_DIR, "cache"))
+CACHE_EXPIRE_DAYS= config.CACHE_EXPIRE_DAYS(initial=5)
+
+
+blob_s3_key = "original/{}"
+torrentblob_s3_key = "torrents/{}"

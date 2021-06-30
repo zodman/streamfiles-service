@@ -1,14 +1,14 @@
 fastapi[all]
-orm~=0.1
+tortoise-orm
 aiosqlite
 python-multipart
 aioboto3
 jinja2
-aiofiles
+aiofiles~=0.7
 torf
 
 # tools
-click
 easyconf
-python-dotenv
+diskcache
 
+# admin

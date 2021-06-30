@@ -11,8 +11,10 @@
     "obs": "javascript-obfuscator static/dist/main.js --output static/dist/obs.main.js"
   },
   "dependencies": {
+    "alpinejs": "^3.0.1",
     "bittorrent-tracker": "^9.17.0",
     "browserify": "^17.0.0",
+    "byte-size": "^7.0.1",
     "esmify": "^2.1.1",
     "javascript-obfuscator": "^2.14.0",
     "run-node": "^2.0.0",

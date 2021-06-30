@@ -1,16 +1,18 @@
-let WebTorrent = require("webtorrent")
+import Alpine from 'alpinejs'
+import torrent from './torrent.js'
 
+window.Alpine = Alpine
+let WebTorrent = require("webtorrent")
 if (WebTorrent.WEBRTC_SUPPORT) {
     console.log("supported");
 }
 
-client = new WebTorrent();
+let client = new WebTorrent();
 var protocol = window.location.protocol.replace("http", "ws")
-trackers = [
+let trackers = [
     `${protocol}//${window.location.hostname}:8080/`
 ]
-const torrentUrl = `${window.location.protocol}//${window.location.host}/torrent/`;
-
+const torrentUrl = `${window.location.protocol}//${window.location.host}/torrent/${window.file}`;
 console.log("trackers", trackers, 'url',  torrentUrl);
 client.add(torrentUrl,{'announce': trackers},(torrent) =>{
     console.log("loaded", torrent.numPeers, 'peers', torrent);
@@ -21,16 +23,20 @@ client.add(torrentUrl,{'announce': trackers},(torrent) =>{
 });
 
 
-client.on('torrent', t => {
-        console.log("on torrent", t);
-        let url =`${window.location.protocol}//${window.location.host}/download/otome-1.mp4?wiii=1`;
-        t.addWebSeed(url);
+client.on('torrent', torrent => {
+    console.log("on torrent", torrent);
+    file = torrent.files[0].name
+    let url =`${window.location.protocol}//${window.location.host}/download/${file}`;
+    torrent.addWebSeed(url);
+    torrent.on('download', function (bytes) {
+        window.torrent = torrent
+    })
 });
-
-
 
 client.on("error", (e) =>{
     console.log("client error", e);
 });
 
 window.client=client
+Alpine.data('torrent', torrent);
+Alpine.start()
