@@ -81,6 +81,8 @@ async def torrent(filename:str):
 async def download(filename: str, response: Response, request: Request):
     key = blob_s3_key.format(filename)
     bytes_ = request.headers.get("range")
+    if not bytes_:
+        return Response(content="meme nani?", status_code=200)
     kwargs = dict(Bucket=BUCKET, Key=key)
     kwargs.update({'Range': bytes_})
     cache = AsyncCache()

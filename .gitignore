@@ -156,3 +156,5 @@ Thumbs.db
 *.yml
 
 settings.yml
+*.torrent
+db.sqlite3*
