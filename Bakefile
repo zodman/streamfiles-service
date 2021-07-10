@@ -32,5 +32,11 @@ upload:
     ssh proxy supervisorctl restart webtracker
 
 update:
+    set -x
     ssh proxy "cd apps/streamfiles-service; git pull"
+    yarn run all
+    scp -r static/dist proxy:apps/streamfiles-service/static/
     ssh proxy supervisorctl restart uvicorn:*
+
+all: exe update upload
+    red "done"
