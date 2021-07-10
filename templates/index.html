@@ -8,7 +8,10 @@
         <style>
           [x-cloak] { display: none !important; }
         </style>
-          <script> window.file="{{filename}}" </script>
+          <script> 
+            window.file="{{filename}}"; 
+            window.WS_SERVER="{{WS_SERVER}}";
+          </script>
     </head>
     <body>
         <script src="/static/dist/main.js" defer></script>

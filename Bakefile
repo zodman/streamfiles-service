@@ -19,3 +19,15 @@ upload:
     set -x
     #litecli db.sqlite3 -e "delete from file where filename=\"$1\""
     curl --request POST -F "file=@$1" http://localhost:8000/upload/
+
+exe:
+    set -x
+    yarn run exe
+    gzip -f webtorrent-tracker
+
+upload:
+    set -x
+    scp webtorrent-tracker.gz proxy:apps/streamfiles-service
+    ssh proxy "cd apps/streamfiles-service && gzip -fd webtorrent-tracker.gz"
+    ssh proxy supervisorctl restart webtracker
+

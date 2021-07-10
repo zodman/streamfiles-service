@@ -6,7 +6,7 @@ import aioboto3
 import botocore.exceptions
 from torf import Torrent, Magnet
 import datetime
-from config import BUCKET, aws_kwargs, CDN_PATH
+from config import BUCKET, aws_kwargs, CDN_PATH, WS_SERVER
 from config import CACHE_DIR, CACHE_EXPIRE_DAYS, blob_s3_key, torrentblob_s3_key
 from asyncdiskcache import AsyncCache
 import logging
@@ -113,4 +113,5 @@ async def download(filename: str, response: Response, request: Request):
 
 @app.get("/{filename}")
 async def root(request: Request, filename: str):
-    return templates.TemplateResponse("index.html", {'request': request, 'filename':filename})
+    ws_server = WS_SERVER
+    return templates.TemplateResponse("index.html", {'request': request, 'filename':filename, 'WS_SERVER':ws_server})

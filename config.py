@@ -27,3 +27,4 @@ CACHE_EXPIRE_DAYS= config.CACHE_EXPIRE_DAYS(initial=5)
 
 blob_s3_key = "original/{}"
 torrentblob_s3_key = "torrents/{}"
+WS_SERVER=config.WS_SERVER(default="ws://localhost:8080")

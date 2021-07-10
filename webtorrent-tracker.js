@@ -36,7 +36,7 @@ server.on('listening', function () {
 })
 
 // start tracker server listening! Use 0 to listen on a random free port.
-server.listen(8080, "0.0.0.0")
+server.listen(process.argv[2] , "0.0.0.0")
 
 // listen for individual tracker messages from peers:
 
