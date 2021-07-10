@@ -31,3 +31,6 @@ upload:
     ssh proxy "cd apps/streamfiles-service && gzip -fd webtorrent-tracker.gz"
     ssh proxy supervisorctl restart webtracker
 
+update:
+    ssh proxy "cd apps/streamfiles-service; git pull"
+    ssh proxy supervisorctl restart uvicorn:*
